@@ -5,19 +5,20 @@
 }
 <style>
     .loader {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1051;
-    }    
-    .loader > img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1051;
     }
+
+        .loader > img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
 </style>
 <h2>Index</h2>
 
@@ -61,8 +62,7 @@
     {
         HttpMethod = "POST",
         LoadingElementId = "loader",
-        //UpdateTargetId = "dynamiccontainer",
-        OnSuccess="OnSccess"
+        OnSuccess = "OnSccess"
     },
     htmlAttributes: new
     {
@@ -88,7 +88,7 @@
 
                 <div class="form-horizontal">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
+                    <div class="form-group row">
                         @Html.Label("FirstName", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
                             @Html.Editor("FirstName", new { htmlAttributes = new { @class = "form-control" } })
@@ -128,6 +128,7 @@
                         </div>
                     </div>
                 </div>
+                @*@Html.HttpMethodOverride(HttpVerbs.Delete)*@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -141,29 +142,31 @@
     <img src="~/fonts/loader.gif" />
 </div>
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@section script{
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
-<script>
-    function OnSccess(e) {
-        if (typeof e === 'object' && e.errors) {
-            displayValidationErrors(e.errorList);
-            return;
+    <script>
+        function OnSccess(e) {
+            if (typeof e === 'object' && e.errors) {
+                displayValidationErrors(e.errorList);
+                return;
+            }
+            else if (typeof e !== 'object') {
+                $("#dynamiccontainer").html(e);
+            }
+
+            $('#exampleModal').modal('hide');
         }
-        else if (typeof e !== 'object') {
-            $("#dynamiccontainer").html(e);
+
+        function displayValidationErrors(errors) {
+            $.each(errors, function (idx, validationError) {
+
+                $("span[data-valmsg-for='" + validationError.PropertyName + "']").text(validationError.ErrorList[0]);
+
+            });
         }
-
-        $('#exampleModal').modal('hide');
-    }
-
-    function displayValidationErrors(errors) {
-    $.each(errors, function (idx, validationError) {
-
-        $("span[data-valmsg-for='" + validationError.PropertyName + "']").text(validationError. ErrorList[0]);
-
-    });
+    </script>
 }
-</script>

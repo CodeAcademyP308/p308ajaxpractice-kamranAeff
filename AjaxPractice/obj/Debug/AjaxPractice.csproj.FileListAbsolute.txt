@@ -72,3 +72,4 @@ E:\CodeAcademy\P308\AjaxPractice\AjaxPractice\obj\Debug\AjaxPractice.dll
 E:\CodeAcademy\P308\AjaxPractice\AjaxPractice\obj\Debug\AjaxPractice.pdb
 E:\CodeAcademy\P308\AjaxPractice\AjaxPractice\obj\Debug\AjaxPractice.Migrations.Initial.resources
 E:\CodeAcademy\P308\AjaxPractice\AjaxPractice\obj\Debug\AjaxPractice.csproj.GenerateResource.cache
+E:\CodeAcademy\P308\AjaxPractice\AjaxPractice\obj\Debug\AjaxPractice.csprojAssemblyReference.cache
